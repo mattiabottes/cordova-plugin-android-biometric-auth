@@ -8,7 +8,7 @@ This plugin will only work on devices with SDK >= 23 (Android 6.0) and with cord
 
 # Migration from cordova-plugin-android-fingerprint-auth
 
-All you have to do is to replace `FingerprintAuth` with `BiometricAuth`.
+All you have to do is to replace `FingerprintAuth` with `BiometricAuth`, than replace `FINGERPRINT` with `BIOMETRIC` for error messages.
 
 ### Example
 
@@ -16,8 +16,24 @@ All you have to do is to replace `FingerprintAuth` with `BiometricAuth`.
 //old code (cordova-plugin-android-fingerprint-auth)
 FingerprintAuth.isAvailable(success, error);
 
+function error(e) {
+  if (e === FingerprintAuth.ERRORS.FINGERPRINT_CANCELLED) {
+    return;
+  }
+
+  //your code...
+}
+
 //new code (cordova-plugin-android-biometric-auth)
 BiometricAuth.isAvailable(success, error);
+
+function error(e) {
+  if (e === BiometricAuth.ERRORS.BIOMETRIC_CANCELLED) {
+    return;
+  }
+
+  //your code...
+}
 ```
 
 # Installation
