@@ -1,45 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        id="cordova-plugin-android-fingerprint-auth"
-        version="1.5.0">
-    <name>FingerprintAuth</name>
-    <description>Cordova plugin to use Android fingerprint authentication API</description>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android" id="cordova-plugin-android-biometric-auth" version="0.0.1">
+    <name>BiometricAuth</name>
+    <description>Cordova plugin to use Android Biometric API for authentication (androidx.biometric)</description>
     <license>Apache 2.0</license>
-    <keywords>cordova,plugin,android,fingerprint,authentication</keywords>
+    <keywords>cordova,plugin,android,fingerprint,biometric,authentication</keywords>
     <repo></repo>
     <issue></issue>
-
-    <js-module src="www/FingerprintAuth.js" name="FingerprintAuth">
-        <clobbers target="FingerprintAuth" />
+    <engines>
+        <engine name="cordova-android" version=">=10.0.0" />
+    </engines>
+    <js-module src="www/BiometricAuth.js" name="BiometricAuth">
+        <clobbers target="BiometricAuth" />
     </js-module>
-
-    <!-- android -->
     <platform name="android">
+        <preference name="ANDROIDX_BIOMETRIC_VERSION" default="1.1.0" />
+        <framework src="androidx.biometric:biometric:$ANDROIDX_BIOMETRIC_VERSION" />
         <config-file target="res/xml/config.xml" parent="/*">
-            <feature name="FingerprintAuth" >
-                <param name="android-package" value="com.cordova.plugin.android.fingerprintauth.FingerprintAuth"/>
+            <feature name="BiometricAuth" >
+                <param name="android-package" value="com.cordova.plugin.android.BiometricAuth.BiometricAuth"/>
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.USE_BIOMETRIC" />
             <uses-permission android:name="android.permission.USE_FINGERPRINT" />
         </config-file>
-
-        <source-file src="src/android/FingerprintAuth.java" target-dir="src/com/cordova/plugin/android/fingerprintauth" />
-        <source-file src="src/android/FingerprintAuthenticationDialogFragment.java" target-dir="src/com/cordova/plugin/android/fingerprintauth" />
-        <source-file src="src/android/FingerprintUiHelper.java" target-dir="src/com/cordova/plugin/android/fingerprintauth" />
-        <resource-file src="res/android/drawable/ic_fingerprint_error.xml" target="res/drawable/ic_fingerprint_error.xml" />
-        <resource-file src="res/android/drawable/ic_fingerprint_success.xml" target="res/drawable/ic_fingerprint_success.xml" />
-        <resource-file src="res/android/drawable-hdpi/ic_fp_40px.png" target="res/drawable-hdpi/ic_fp_40px.png" />
-        <resource-file src="res/android/drawable-mdpi/ic_fp_40px.png" target="res/drawable-mdpi/ic_fp_40px.png" />
-        <resource-file src="res/android/drawable-nodpi/android_robot.png" target="res/drawable-nodpi/android_robot.png" />
-        <resource-file src="res/android/drawable-xhdpi/ic_fp_40px.png" target="res/drawable-xhdpi/ic_fp_40px.png" />
-        <resource-file src="res/android/drawable-xxhdpi/ic_fp_40px.png" target="res/drawable-xxhdpi/ic_fp_40px.png" />
-        <resource-file src="res/android/drawable-xxxhdpi/ic_fp_40px.png" target="res/drawable-xxxhdpi/ic_fp_40px.png" />
-        <resource-file src="res/android/layout/fingerprint_dialog_container.xml" target="res/layout/fingerprint_dialog_container.xml" />
-        <resource-file src="res/android/layout/fingerprint_dialog_content.xml" target="res/layout/fingerprint_dialog_content.xml" />
-        <resource-file src="res/android/values/fpauth-colors.xml" target="res/values/fpauth-colors.xml" />
-        <resource-file src="res/android/values/fpauth-strings.xml" target="res/values/fpauth-strings.xml" />
+        <source-file src="src/android/BiometricAuth.java" target-dir="src/com/cordova/plugin/android/BiometricAuth" />
+        <resource-file src="res/android/values/bauth-strings.xml" target="res/values/bauth-strings.xml" />
         <resource-file src="res/android/values-it" target="res/values-it" />
         <resource-file src="res/android/values-es" target="res/values-es" />
         <resource-file src="res/android/values-ru" target="res/values-ru" />
@@ -58,5 +44,4 @@
         <resource-file src="res/android/values-ar" target="res/values-ar" />
         <resource-file src="res/android/values-ko" target="res/values-ko" />
     </platform>
-
 </plugin>
